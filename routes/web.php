@@ -22,7 +22,7 @@ Route::get('/', function () {
 // Các method thường được sử dụng trong router và đặt tên theo phương thức name()
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/add', [HomeController::class, 'add'])->name('add');
-Route::post('/store', [HomeController::class, 'store'])->name('store.store');
+Route::post('/store', [HomeController::class, 'store'])->name('store.store')->middleware('auth.admin');
 Route::put('/store', [HomeController::class, 'edit'])->name('store.edit');
 Route::delete('/store', [HomeController::class, 'delete'])->name('store.delete');
 

@@ -21,7 +21,12 @@ class CheckLoginAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        echo 'test';
+        echo 'test <br>';
+        if ($request->is('store')) {
+            echo 'Da luu user thanh cong <br>';
+        } elseif ($request->is('admin/*') || $request->is('admin')) {
+            echo 'Khu vuc admin <br>';
+        }
         return $next($request);
     }
 }

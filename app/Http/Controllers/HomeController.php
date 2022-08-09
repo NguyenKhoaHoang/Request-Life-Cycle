@@ -48,7 +48,23 @@ class HomeController extends Controller
 
         // Cach 3: dung form request
 
-        return 'phuong thuc post';
+
+        echo 'Cac item trong request->all la: <br>';
+        $allData = $request->all();
+        foreach ($allData as $item) {
+            echo '- ' . $item . '<br>';
+        }
+        echo 'Đường dẫn là: ' . $request->path() . '<br>';
+        echo 'Full đường dẫn là: '. $request->fullUrl() . '<br>';
+        echo 'Method là: '. $request->method() . '<br>';
+        if($request->has('username')){
+            echo 'Có trường user name <br>';
+        }
+        if(!$request->has('address')){
+            echo 'Ko Có trường address <br>';
+        }
+        $content = 'Da add user: ' . $request->username . ' voi mat khau la: ' . $request->password;
+        return $content;
     }
 
     public function edit()
