@@ -32,7 +32,7 @@ Route::redirect('/show-add', 'add');
 // Nhóm các route lại với nhau
 Route::middleware('auth.admin')->prefix('/admin')->group(function () {
 
-    Route::get('/', [DashboardController::class,'index']);
+    Route::get('/', [DashboardController::class, 'index']);
 
     // Route có truyền id vào
     Route::get('/post/{id}', function ($id) {
@@ -40,14 +40,14 @@ Route::middleware('auth.admin')->prefix('/admin')->group(function () {
     });
 
     // Route không bắt buộc có truyền id vào
-    Route::get('/food/{id?}', [HomeController::class,'food']);
+    Route::get('/food/{id?}', [HomeController::class, 'food']);
 
     // Lấy id và slug theo điều kiện where và biểu thức chính quy
     // Ví dụ: http://127.0.0.1:8000/admin/news/tin-tuc-moi-235.html
     // id la: 235
     // slug la: tin-tuc-moi
     Route::get('/news/{slug}-{id}.html', function ($slug = null, $id = null) {
-        $content = 'id la: ' . $id.'<br>';
+        $content = 'id la: ' . $id . '<br>';
         $content .= 'slug la: ' . $slug;
         return $content;
     })->where(

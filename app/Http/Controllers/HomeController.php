@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,8 +17,37 @@ class HomeController extends Controller
         return view('form');
     }
 
-    public function store()
+    public function store(UserRequest $request)
     {
+        // validate tu dong back nguoc lai trang request toi neu xay ra loi
+        // :attribute la ten cua trường đưa vào
+
+        // Cach 1
+        // $request->validate([
+        //     'username' => 'required|min:2',
+        //     'password' => 'required|min:5|integer'
+        // ], [
+        //     'username.required' => 'Phai nhap :attribute',
+        //     'username.min'=>'Username phai hon 2 ky tu',
+        //     'password.required'=>'Phai nhap :attribute',
+        //     'password.min'=>'Password phai hon 5 ky tu',
+        //     'password.integer'=>'Password chi chua so'
+        // ]);
+
+        // Cach 2
+        // $rules = [
+        //     'username' => 'required|min:2',
+        //     'password' => 'required|min:5|integer'
+        // ];
+        // $messages = [
+        //     'required' => ':attribute bat buoc phai nhap',
+        //     'min' => ':attribute khong duoc nho hon :min ky tu',
+        //     'integer' => ':attribute phai la so',
+        // ];
+        // $request->validate($rules,$messages);
+
+        // Cach 3: dung form request
+
         return 'phuong thuc post';
     }
 
@@ -33,6 +63,6 @@ class HomeController extends Controller
 
     public function food($id = null)
     {
-        return 'food co id la: '.$id;
+        return 'food co id la: ' . $id;
     }
 }
