@@ -55,12 +55,12 @@ class HomeController extends Controller
             echo '- ' . $item . '<br>';
         }
         echo 'Đường dẫn là: ' . $request->path() . '<br>';
-        echo 'Full đường dẫn là: '. $request->fullUrl() . '<br>';
-        echo 'Method là: '. $request->method() . '<br>';
-        if($request->has('username')){
+        echo 'Full đường dẫn là: ' . $request->fullUrl() . '<br>';
+        echo 'Method là: ' . $request->method() . '<br>';
+        if ($request->has('username')) {
             echo 'Có trường user name <br>';
         }
-        if(!$request->has('address')){
+        if (!$request->has('address')) {
             echo 'Ko Có trường address <br>';
         }
         $content = 'Da add user: ' . $request->username . ' voi mat khau la: ' . $request->password;
@@ -69,12 +69,16 @@ class HomeController extends Controller
 
     public function edit()
     {
-        return 'phuong thuc put';
+        echo 'phuong thuc put';
+        // Respone trả về route home với status code là 303 và truyên vào 1 session status tới trang home
+        return redirect(route('home'), 303)->with('status','user updated!');
     }
 
     public function delete()
     {
-        return 'phuong thuc delete';
+        echo 'phuong thuc delete';
+        // Respone trả về route admin.news có truyền tham số slug và id
+        return redirect()->route('admin.news', ['slug' => 'nguyen-khoa-hoang', 'id' => 257]);
     }
 
     public function food($id = null)

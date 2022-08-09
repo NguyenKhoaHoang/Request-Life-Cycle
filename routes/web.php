@@ -15,12 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Các method thường được sử dụng trong router và đặt tên theo phương thức name()
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/add', [HomeController::class, 'add'])->name('add');
 Route::post('/store', [HomeController::class, 'store'])->name('store.store')->middleware('auth.admin');
 Route::put('/store', [HomeController::class, 'edit'])->name('store.edit');
@@ -65,3 +65,22 @@ Route::middleware('auth.admin')->prefix('/admin')->group(function () {
         return 'categories admin';
     });
 });
+
+// Respone trả lại một đoạn json
+Route::get('demo-response', function () {
+    $contentArr = [
+        'name' => 'NKH',
+        'intern' => 'Dsoft',
+        'academy' => 'BKDN'
+    ];
+
+    return $contentArr;
+})->name('demoResponse');
+
+Route::get('demo-response-2', function () {
+    $title = 'Demo response';
+    $number = 2;
+    $response = response()
+        ->view('home', compact('title', 'number'));
+    return $response;
+})->name('demoResponse.2');

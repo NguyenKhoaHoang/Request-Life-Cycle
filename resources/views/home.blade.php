@@ -9,11 +9,26 @@
 </head>
 
 <body>
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+
+    @isset($title)
+        {{ $title }}
+        {{ $number }}
+    @endisset
+
     <h1>This is a home page</h1>
     <a href="{{ route('add') }}">Store page</a>
     <br>
     {{-- truyen tham so vao route --}}
     <a href="{{ route('admin.news', ['id' => 257, 'slug' => 'tin-tuc-moi']) }}">News</a>
+    <br>
+    <a href="{{ route('demoResponse') }}">Demo response</a>
+    <br>
+    <a href="{{ route('demoResponse.2') }}">Demo response 2</a>
 </body>
 
 </html>
