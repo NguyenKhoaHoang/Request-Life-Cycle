@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckLoginAdmin;
+use App\Http\Middleware\ProductPermission;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -13,6 +15,9 @@ class Kernel extends HttpKernel
      *
      * @var array<int, class-string|string>
      */
+    /**
+     * middleware ở đây sẽ được áp dụng cho toàn bộ các route
+     */
     protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\TrustProxies::class,
@@ -21,12 +26,16 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        // CheckLoginAdmin::class,
     ];
 
     /**
      * The application's route middleware groups.
      *
      * @var array<string, array<int, class-string|string>>
+     */
+    /**
+     * Các middleware thuộc riêng bên web và api
      */
     protected $middlewareGroups = [
         'web' => [
@@ -63,5 +72,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'auth.admin' => CheckLoginAdmin::class,
+        'auth.admin.product' => ProductPermission::class,
     ];
 }

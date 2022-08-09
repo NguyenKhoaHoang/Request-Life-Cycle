@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,7 +30,9 @@ Route::delete('/store', [HomeController::class, 'delete'])->name('store.delete')
 Route::redirect('/show-add', 'add');
 
 // Nhóm các route lại với nhau
-Route::prefix('/admin')->group(function () {
+Route::middleware('auth.admin')->prefix('/admin')->group(function () {
+
+    Route::get('/', [DashboardController::class,'index']);
 
     // Route có truyền id vào
     Route::get('/post/{id}', function ($id) {
@@ -54,7 +57,7 @@ Route::prefix('/admin')->group(function () {
         ]
     )->name('admin.news');
 
-    Route::get('/products', function () {
+    Route::middleware('auth.admin.product')->get('/products', function () {
         return 'product admin';
     });
 
