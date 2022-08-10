@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
     public function index()
     {
         return view('home');
@@ -63,22 +64,30 @@ class HomeController extends Controller
         if (!$request->has('address')) {
             echo 'Ko Có trường address <br>';
         }
-        $content = 'Da add user: ' . $request->username . ' voi mat khau la: ' . $request->password;
+        $content = 'Da add user: ' . $request->username .
+            ' voi mat khau la: ' . $request->password;
         return $content;
     }
 
     public function edit()
     {
         echo 'phuong thuc put';
-        // Respone trả về route home với status code là 303 và truyên vào 1 session status tới trang home
-        return redirect(route('home'), 303)->with('status','user updated!');
+        // Respone trả về route home với status code
+        // là 303 và truyên vào 1 session status tới trang home
+        return redirect(route('home'), 303)->with('status', 'user updated!');
     }
 
     public function delete()
     {
         echo 'phuong thuc delete';
         // Respone trả về route admin.news có truyền tham số slug và id
-        return redirect()->route('admin.news', ['slug' => 'nguyen-khoa-hoang', 'id' => 257]);
+        return redirect()->route(
+            'admin.news',
+            [
+                'slug' => 'nguyen-khoa-hoang',
+                'id' => 257
+            ]
+        );
     }
 
     public function food($id = null)

@@ -16,7 +16,7 @@ class ProductPermission
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!$this->isAdmin()){
+        if (!$this->isAdmin()) {
             return redirect()->route('home');
         }
         echo 'product permission checked';
